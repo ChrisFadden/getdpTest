@@ -1,0 +1,11 @@
+#! /usr/bin/bash
+
+cd ./build
+gmsh microstrip.geo -3
+getdp microstrip -solve EleSta_v -bin
+getdp microstrip -pos Map
+
+#CleanUp
+#rm microstrip.msh
+#rm microstrip.pre
+#rm microstrip.res
