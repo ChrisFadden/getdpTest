@@ -1,9 +1,14 @@
 #! /usr/bin/bash
 
+#Run Simulations
 cd ./build
 gmsh microstrip.geo -3
 getdp microstrip -solve EleSta_v -bin
 getdp microstrip -pos Map
+
+#Process Data
+cd ..
+python saveData.py
 
 #CleanUp
 #rm microstrip.msh

@@ -4,7 +4,7 @@ import random
 import re
 
 fout = './build/Estatic.h5'
-f5 = h5py.File(fout,"r")
+f5 = h5py.File(fout,"w")
 
 #Node File
 fn = './build/microstrip.msh'
@@ -32,6 +32,7 @@ for line in fp:
 fp.close()
 
 f5.create_dataset("nodes", data=nodes)
+#f5.create_dataset("nodes", data=nodes,compression='gszip',compression_opts=9)
 
 #First File
 fn = './build/Vnode.dat'
