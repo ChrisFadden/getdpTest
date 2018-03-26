@@ -1,8 +1,0 @@
-#There can be no comments when this is actually run...
-#	Go to page 153 for options to change the figure
-
-General.NoPopup = 1
-
-#Print "Voltage.pgf" #Latex Output
-Print "test.png"; #Figure Output
-Exit;
