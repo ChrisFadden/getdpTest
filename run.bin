@@ -2,13 +2,12 @@
 
 #Run Simulations
 cd ./build
-gmsh microstrip.geo -3
-getdp microstrip -solve EleSta_v -bin
-getdp microstrip -pos Map
+gmsh brick.geo -2
+getdp brick.pro -solve Thermal_T -pos Map_T
 
 #Process Data
-cd ..
-python saveData.py
+#cd ..
+#python saveData.py
 
 #CleanUp
 #rm microstrip.msh

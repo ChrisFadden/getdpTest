@@ -328,17 +328,10 @@ h = 2.e-3; // vertical position of the cut
 
 PostOperation {
   { Name Map; NameOfPostProcessing EleSta_v;
-     Operation {
-       //Print [ v, OnElementsOf Vol_Ele, File "mStrip_v.pos" ];
-       //Print [ e, OnElementsOf Vol_Ele, File "mStrip_e.pos" ];
-       //Print [ e, OnLine {{e,h,0}{14.e-3,h,0}}{60}, File "Cut_e.pos" ];
-			 Print[v, OnElementsOf Vol_Ele, Format NodeTable, File "Vnode.dat"];
-     }
-  }
-  { Name Cut; NameOfPostProcessing EleSta_v;
-    // same cut as above, with more points and exported in raw text format
-    Operation {
-      Print [ e, OnLine {{e,e,0}{14.e-3,e,0}} {500}, Format TimeTable, File "Cut_e.txt" ];
-    }
-  }
+		Operation {
+       Print [ v, OnElementsOf Vol_Ele, File "mStrip_v.pos" ];
+       Print [ e, OnElementsOf Vol_Ele, File "mStrip_e.pos" ];
+			 Print [ v, OnElementsOf Vol_Ele, Format NodeTable, File "Vnode.dat"];		 
+		}
+  } 
 }
