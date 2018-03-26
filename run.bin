@@ -1,9 +1,22 @@
 #! /usr/bin/bash
 
+#Create environment
+rm -rf build
+cp -r SimParam build
+cp saveFig.bin ./build/
+
 #Run Simulations
 cd ./build
-gmsh brick.geo -2
-getdp brick.pro -solve Thermal_T -pos Map_T
+
+#Create the 2D Mesh
+gmsh microstrip.geo -2
+
+#Solve the FEM problem
+getdp microstrip.pro -solve EleSta_v -pos Map
+
+#Save the Figure
+sed -i '/^[[:blank:]]*#/d;s/#.*//' saveFig.bin #Gmsh can't handle comments...
+gmsh mStrip_v.pos saveFig.bin
 
 #Process Data
 #cd ..

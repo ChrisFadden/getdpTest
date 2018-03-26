@@ -1,0 +1,8 @@
+#	There can be no comments when this is actually run...
+#	Go to page 131 (141 of pdf) for options to change the figure
+
+View.ColormapNumber = 7;
+
+#Print "Voltage.pgf" #Latex Output
+Print "test.png"; #Figure Output
+#Exit;
