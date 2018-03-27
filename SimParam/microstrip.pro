@@ -330,7 +330,7 @@ PostOperation {
   { Name Map; NameOfPostProcessing EleSta_v;
 		Operation {
        Print [ v, OnElementsOf Vol_Ele, File "mStrip_v.pos" ];
-       Print [ e, OnElementsOf Vol_Ele, File "mStrip_e.pos" ];
+			 Print [ e, OnElementsOf Vol_Ele, File "mStrip_e.pos" ];
 			 Print [ v, OnElementsOf Vol_Ele, Format NodeTable, File "Vnode.dat"];		 
 		}
   } 

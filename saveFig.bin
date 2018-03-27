@@ -1,8 +1,14 @@
 #	There can be no comments when this is actually run...
 #	Go to page 131 (141 of pdf) for options to change the figure
 
+#To understand .pos output: http://www.manpagez.com/info/gmsh/gmsh-2.3.1/gmsh_51.php#SEC51
+
+#New file format: http://www.manpagez.com/info/gmsh/gmsh-2.3.1/gmsh_55.php#SEC55
+#Can save view from gmsh as a Mesh-based .pos file
+#Can write own binary Mesh-based .pos file using Python + HDF5
+
 View.ColormapNumber = 7;
 
-#Print "Voltage.pgf" #Latex Output
-Print "test.png"; #Figure Output
+Print "Voltage.pgf"; #Latex Output
+#Print "test.png"; #Figure Output
 #Exit;

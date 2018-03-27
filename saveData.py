@@ -6,6 +6,7 @@ import gmsh
 
 fout = './build/Estatic.h5'
 fn = './build/microstrip.msh'
+fn = './build/mStrip_e.pos'
 
 #Load Mesh
 mesh = gmsh.Mesh()
