@@ -34,7 +34,7 @@ class Mesh:
         self.Verts = []
         self.Elmts = {}
         self.Phys = {}
-
+        
         self.npts = 0
         self.nElmts = {}
         self.nprops = 0
@@ -72,9 +72,10 @@ class Mesh:
                 self.nprops = int(line.split()[0])
                 for i in range(0, self.nprops):
                     line = fid.readline()
-                    newkey = int(line.split()[0])
+                    newkey = line.split()[0]
                     qstart = line.find('"')+1
                     qend = line.find('"', -1, 0)-1
+                    newkey = newkey + "_" + line.split()[1]
                     self.Phys[newkey] = line[qstart:qend]
                 line = fid.readline()
                 if line.find('$EndPhysicalNames') != 0:
@@ -110,7 +111,7 @@ class Mesh:
                     if ntags > 0:                   # set physical id
                         physid = int(data[k])
                         if physid not in self.Phys:
-                            self.Phys[physid] = 'Physical Entity %d' % physid
+                            #self.Phys[physid] = 'Physical Entity %d' % physid
                             self.nprops += 1
                         k += ntags
 
@@ -540,4 +541,4 @@ if __name__ == '__main__':
     # demo.trimesh(mesh.Verts[:, 0:2],mesh.Elmts[2][1])
     # mesh.write_vtu()
     # mesh.write_neu(bdy_ids=4)
-    # mesh.write_neu()
+# mesh.write_neu()
