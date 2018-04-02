@@ -21,15 +21,16 @@ nodes = np.asarray(f5['/Mesh/nodes'])
 fp = open(fplot,"w")
 fp.write("$MeshFormat$\n")
 fp.write("2.2 0 8\n")
+fp.write("$EndMeshFormat$\n")
 
 #Write out the Nodes
 fp.write("$Nodes\n")
 fp.write(str(nodes.shape[0]) + "\n")
 for ii in np.arange(nodes.shape[0]):
     fp.write(str(ii+1) + " ")
-    fp.write(str(nodes[ii,0]+1) + " ")
-    fp.write(str(nodes[ii,1]+1) + " ")
-    fp.write(str(nodes[ii,2]+1) + "\n")
+    fp.write(str(nodes[ii,0]) + " ")
+    fp.write(str(nodes[ii,1]) + " ")
+    fp.write(str(nodes[ii,2]) + "\n")
 fp.write("$EndNodes\n")
 
 #Write out the Elements
@@ -55,8 +56,8 @@ for kk in f5elemType.keys():
         
             #write out nodes for element
             for ll in np.arange(elmNodes.shape[1]-1):
-                fp.write(str(elmNodes[jj,ll]+1) + " ")
-            fp.write(str(elmNodes[jj,elmNodes.shape[1]-1]+1) + "\n")
+                fp.write(str(elmNodes[jj,ll]) + " ")
+            fp.write(str(elmNodes[jj,elmNodes.shape[1]-1]) + "\n")
             ii = ii+1
 
 fp.write("$EndElements\n")

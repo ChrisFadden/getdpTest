@@ -13,7 +13,7 @@ f5 = h5py.File(fout,"w")
 gpmesh = f5.create_group("Mesh")
 
 #Nodes
-gpmesh.create_dataset("nodes", data=mesh.Verts)
+gpmesh.create_dataset("nodes", data=(mesh.Verts - 1))
 
 #Elements
 types = list(mesh.Elmts.keys())
