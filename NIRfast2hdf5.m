@@ -5,15 +5,15 @@ close all;
 meshFP = '/home/czf41/Documents/Sim_tools/Test_2D/mesh_anom';
 
 f5_path = '/home/czf41/Documents/Sim_tools/Test_2D/test.h5';
-f5_path2 = '/home/czf41/Github/getdpTest/build/output.h5';
-%delete /home/czf41/Documents/Sim_tools/Test_2D/test.h5; %Remove file if it already exists...
+%f5_path2 = '/home/czf41/Github/getdpTest/build/output.h5';
 
 mesh = load_mesh(meshFP);
 
 %Write the physical types
 %physTypes = unique(mesh.region); %Get number of regions
 physTypes = {pad('1_1_Background',19),pad('1_2_Scatterer',19),...
-             pad('1_333_Source',19),pad('1_555_Sink',19)};
+             pad('1_333_Source',19),pad('1_555_Sink',19),...
+             pad('1_786_Bndry',19)};
 hdf5write(f5_path,'Mesh/Physical Types',physTypes);
 
 %Write the nodes
