@@ -12,7 +12,8 @@ mesh = load_mesh(meshFP);
 
 %Write the physical types
 %physTypes = unique(mesh.region); %Get number of regions
-physTypes = {pad('1_1_Background',19),pad('1_2_Scatterer',19)};
+physTypes = {pad('1_1_Background',19),pad('1_2_Scatterer',19),...
+             pad('1_333_Source',19),pad('1_555_Sink',19)};
 hdf5write(f5_path,'Mesh/Physical Types',physTypes);
 
 %Write the nodes
