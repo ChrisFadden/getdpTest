@@ -1,5 +1,10 @@
 #! /usr/bin/bash
 
+#Create Mesh
+cd ./Python/
+python h5toGmsh.py
+cd ..
+
 #Create environment
 rm -rf build
 cp -r SimParam build
@@ -8,21 +13,10 @@ cp saveFig.bin ./build/
 #Run Simulations
 cd ./build
 
-#Create the 2D Mesh
-gmsh microstrip.geo -2
-
 #Solve the FEM problem
 getdp microstrip.pro -solve EleSta_v -pos Map
 
-#Save the Figure
-sed -i '/^[[:blank:]]*#/d;s/#.*//' saveFig.bin #Gmsh can't handle comments...
-gmsh mStrip_v.pos saveFig.bin
-
-#Process Data
-#cd ..
-#python saveData.py
-
-#CleanUp
-#rm microstrip.msh
-#rm microstrip.pre
-#rm microstrip.res
+#Save the Data
+cd ../Python/
+python saveData.py
+python plotFile.py

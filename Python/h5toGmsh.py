@@ -2,11 +2,11 @@ import h5py
 import numpy as np
 import gmsh
 
-fn = '/home/czf41/Documents/Sim_tools/Test_2D/test.h5'
-fmesh = '/home/czf41/Documents/Sim_tools/Test_2D/test.msh'
+#fn = '/home/czf41/Documents/Sim_tools/Test_2D/test.h5'
+#fmesh = '/home/czf41/Documents/Sim_tools/Test_2D/test.msh'
 
-#fn = './build/output.h5'
-#fmesh = './build/outputGmsh.msh'
+fn = '../SimParam/output.h5'
+fmesh = '../SimParam/microstrip.msh'
 
 ###Load Mesh Nodes
 f5 = h5py.File(fn,"r")

@@ -2,15 +2,15 @@ import h5py
 import numpy as np
 import gmsh
 
-fn = './build/output.h5'
-fplot = './build/output.pos'
+fn = '../build/output.h5'
+fplot = '../build/output.pos'
 
 #Mesh object for nodes per element
 tmp = gmsh.Mesh()
 elm_type = tmp.elm_type
 
 #Load Data
-fd = './build/Vnode.dat'
+fd = '../build/Vnode.dat'
 vout = np.loadtxt(fd,skiprows=1,usecols=1)
 
 ##Load Mesh Nodes
@@ -36,8 +36,8 @@ fp.write("$EndNodes\n")
 #Write out the Elements
 fp.write("$Elements\n")
 f5elemType = f5['/Mesh/Elements']
-numElements = str(np.asarray(f5elemType['NumElements']))
-fp.write(numElements+"\n")
+numElements = str(int(np.asarray(f5elemType['NumElements'])))
+fp.write(numElements +"\n")
 ii = 1
 for kk in f5elemType.keys():
     if("NumElements" not in kk):
@@ -56,8 +56,8 @@ for kk in f5elemType.keys():
         
             #write out nodes for element
             for ll in np.arange(elmNodes.shape[1]-1):
-                fp.write(str(elmNodes[jj,ll]) + " ")
-            fp.write(str(elmNodes[jj,elmNodes.shape[1]-1]) + "\n")
+                fp.write(str(int(elmNodes[jj,ll])) + " ")
+            fp.write(str(int(elmNodes[jj,elmNodes.shape[1]-1])) + "\n")
             ii = ii+1
 
 fp.write("$EndElements\n")
@@ -87,10 +87,10 @@ for kk in f5elemType.keys():
           
             #write out nodes for element
             for ll in np.arange(elmNodes.shape[1]-1):
-                nodeIdx = elmNodes[jj,ll]
-                fp.write(str(vout[nodeIdx]) + " ")
-            nodeIdx = elmNodes[jj,elmNodes.shape[1]-1]
-            fp.write(str(vout[nodeIdx]) + "\n")
+                nodeIdx = int(elmNodes[jj,ll])
+                fp.write(str(vout[nodeIdx-1]) + " ")
+            nodeIdx = int(elmNodes[jj,elmNodes.shape[1]-1])
+            fp.write(str(vout[nodeIdx-1]) + "\n")
             ii = ii+1
 fp.write("$EndElementNodeData\n")
 fp.close()
