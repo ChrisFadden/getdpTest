@@ -1,8 +1,13 @@
 #! /usr/bin/bash
 
+#Set variables
+simHome='/home/czf41/Github/getdpTest/'
+inputH5='SimParam/output.h5'
+inputMesh='SimParam/microstrip.msh'
+
 #Create Mesh
 cd ./Python/
-python h5toGmsh.py
+python h5toGmsh.py $simHome$inputH5 $simHome$inputMesh
 cd ..
 
 #Create environment

@@ -3,7 +3,7 @@ clear all;
 close all;
 
 meshFP = '/home/czf41/Documents/Sim_tools/Test_2D/mesh_anom';
-f5_path = '/home/czf41/Documents/Projects/onelabSimulations/TEST/SimParam/output.h5';
+f5_path = '/home/czf41/Github/getdpTest/SimParam/output.h5';
 
 mesh = load_mesh(meshFP);
 
