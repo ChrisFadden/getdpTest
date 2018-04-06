@@ -1,32 +1,38 @@
 #! /usr/bin/bash
 
 #Set variables
-simHome='/home/czf41/Github/getdpTest/'
+simHome='/home/czf41/Documents/Projects/onelabSimulations/PressureTest'
 
-inputH5=$simHome'SimParam/output.h5'
-inputMesh=$simHome'SimParam/microstrip.msh'
+h5_name='test.h5'
 
-outputH5=$simHome'build/output.h5'
-outputDat=$simHome'build/Vnode.dat'
-outputPlot=$simHome'build/output.pos'
+inputH5=$simHome'/SimParam/'$h5_name
+inputMesh=$simHome'/SimParam/microstrip.msh'
+
+outputH5=$simHome'/build/'$h5_name
+outputDat=$simHome'/build/Vnode.dat'
+outputPlot=$simHome'/build/output.pos'
+
+#Python Home
+pyHome='/home/czf41/Github/getdpTest'
+
 
 #Create Mesh
-cd ./Python/
+cd $pyHome/Python/
 python h5toGmsh.py $inputH5 $inputMesh
 cd ..
 
 #Create environment
-rm -rf build
-cp -r SimParam build
-cp saveFig.bin ./build/
+rm -rf $simHome/build
+cp -r $simHome/SimParam $simHome/build
+cp $simHome/saveFig.bin $simHome/build/
 
 #Run Simulations
-cd ./build
+cd $simHome/build
 
-#Solve the FEM problem
+#Solve the FEM proble#m
 getdp microstrip.pro -solve EleSta_v -pos Map
 
 #Save the Data
-cd ../Python/
+cd $pyHome/Python/
 python saveData.py $outputH5 $outputDat 
 python plotFile.py $outputH5 $outputPlot
