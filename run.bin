@@ -2,12 +2,17 @@
 
 #Set variables
 simHome='/home/czf41/Github/getdpTest/'
-inputH5='SimParam/output.h5'
-inputMesh='SimParam/microstrip.msh'
+
+inputH5=$simHome'SimParam/output.h5'
+inputMesh=$simHome'SimParam/microstrip.msh'
+
+outputH5=$simHome'build/output.h5'
+outputDat=$simHome'build/Vnode.dat'
+outputPlot=$simHome'build/output.pos'
 
 #Create Mesh
 cd ./Python/
-python h5toGmsh.py $simHome$inputH5 $simHome$inputMesh
+python h5toGmsh.py $inputH5 $inputMesh
 cd ..
 
 #Create environment
@@ -23,5 +28,5 @@ getdp microstrip.pro -solve EleSta_v -pos Map
 
 #Save the Data
 cd ../Python/
-python saveData.py
-python plotFile.py
+python saveData.py $outputH5 $outputDat 
+python plotFile.py $outputH5 $outputPlot

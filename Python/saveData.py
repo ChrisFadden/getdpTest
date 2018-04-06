@@ -1,8 +1,13 @@
 import h5py
 import numpy as np
 import gmsh
+import sys
 
-fout = '../build/output.h5'
+fout = sys.argv[1] #'../build/output.h5'
+fn = sys.argv[2] #'../build/Vnode.dat'
+
+
+#fout = '../build/output.h5'
 
 ##Save Output to HDF5
 f5 = h5py.File(fout,"a")

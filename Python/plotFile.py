@@ -1,21 +1,21 @@
 import h5py
 import numpy as np
 import gmsh
+import sys
 
-fn = '../build/output.h5'
-fplot = '../build/output.pos'
+fn = sys.argv[1] #'../build/output.h5'
+fplot = sys.argv[2] #'../build/output.pos'
 
 #Mesh object for nodes per element
 tmp = gmsh.Mesh()
 elm_type = tmp.elm_type
 
-#Load Data
-fd = '../build/Vnode.dat'
-vout = np.loadtxt(fd,skiprows=1,usecols=1)
-
 ##Load Mesh Nodes
 f5 = h5py.File(fn,"r")
 nodes = np.asarray(f5['/Mesh/nodes'])
+
+#Load Data
+vout = np.asarray(f5['/Output/Vout'])
 
 #Output File for Plotting
 fp = open(fplot,"w")
