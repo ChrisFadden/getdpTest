@@ -11,7 +11,8 @@ fn = sys.argv[2] #'../build/Vnode.dat'
 
 ##Save Output to HDF5
 f5 = h5py.File(fout,"a")
-gpout = f5.create_group("Output")
+#Create group if it does not exist
+gpout = f5.require_group("Output")
 
 #Save Data to HDF5
 vout = np.loadtxt(fn,skiprows=1,usecols=1)

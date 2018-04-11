@@ -2,7 +2,8 @@ clc;
 clear all;
 close all;
 
-meshFP = '/home/czf41/Documents/Sim_tools/Test_2D/mesh_anom';
+mainFP = '/home/czf41/Documents/Sim_tools/Test_2D/';
+meshFP = strcat(mainFP,'mesh_anom');
 f5_path = '/home/czf41/Github/getdpTest/SimParam/output.h5';
 
 mesh = load_mesh(meshFP);
@@ -17,7 +18,7 @@ hdf5write(f5_path,'Mesh/Physical Types',physTypes);
 %Write the nodes
 hdf5write(f5_path,'/Mesh/nodes',mesh.nodes','WriteMode','append');
 
-%Write the elements
+%% Write the elements
 
 %numElements
 hdf5write(f5_path,'Mesh/Elements/NumElements',size(mesh.elements,1),'WriteMode','append');
@@ -61,4 +62,23 @@ for ii = 1:length(tags)
            
 end
 hdf5write(f5_path,'Mesh/Elements/ElemType2/Tag',tags,'WriteMode','append');
+
+
+
+%Check for data
+if(exist(strcat(mainFP,'Optics Data/'),'file'))
+    names = dir(strcat(mainFP,'Optics Data/NIR_FEM*'));
+    names = {strcat(names.folder,'/',names.name)};
+    data = load(names{1}); 
+    hdf5write(f5_path,'Output/Fluence',data.phi,'WriteMode','append');
+    hdf5write(f5_path,'Output/InitPressure',data.ps,'WriteMode','append');
+end
+
+
+
+
+
+
+
+
 

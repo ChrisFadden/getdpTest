@@ -1,9 +1,9 @@
 #! /usr/bin/bash
 
 #Set variables
-simHome='/home/czf41/Documents/Projects/onelabSimulations/PressureTest'
+simHome='/home/czf41/Github/getdpTest'
 
-h5_name='test.h5'
+h5_name='output.h5'
 
 inputH5=$simHome'/SimParam/'$h5_name
 inputMesh=$simHome'/SimParam/microstrip.msh'
