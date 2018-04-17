@@ -1,15 +1,15 @@
 #! /usr/bin/bash
 
 #Set variables
-simHome='/home/czf41/Github/getdpTest'
+simHome='/home/czf41/Documents/Projects/onelabSimulations/WaveEqn'
 
 h5_name='output.h5'
 
 inputH5=$simHome'/SimParam/'$h5_name
-inputMesh=$simHome'/SimParam/microstrip.msh'
+inputMesh=$simHome'/SimParam/EllipticalMirror.msh'
 
 outputH5=$simHome'/build/'$h5_name
-outputDat=$simHome'/build/Vnode.dat'
+outputDat=$simHome'/build/BndMeas.tdat'
 outputPlot=$simHome'/build/output.pos'
 
 #Python Home
@@ -24,15 +24,18 @@ cd ..
 #Create environment
 rm -rf $simHome/build
 cp -r $simHome/SimParam $simHome/build
-cp $simHome/saveFig.bin $simHome/build/
+#cp $simHome/saveFig.bin $simHome/build/
 
 #Run Simulations
 cd $simHome/build
 
-#Solve the FEM proble#m
-getdp microstrip.pro -solve EleSta_v -pos Map
+#Solve the FEM problem
+getdp EllipticalMirror.pro -solve '#1' -pos '#1'
 
 #Save the Data
 cd $pyHome/Python/
 python saveData.py $outputH5 $outputDat 
-python plotFile.py $outputH5 $outputPlot
+#python plotFile.py $outputH5 $outputPlot
+python viewSensorData.py $outputH5
+
+
