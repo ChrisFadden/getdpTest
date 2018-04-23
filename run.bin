@@ -17,9 +17,9 @@ pyHome='/home/czf41/Github/getdpTest'
 
 
 #Create Mesh
-cd $pyHome/Python/
-python h5toGmsh.py $inputH5 $inputMesh
-cd ..
+#cd $pyHome/Python/
+#python h5toGmsh.py $inputH5 $inputMesh
+#cd ..
 
 #Create environment
 rm -rf $simHome/build
@@ -33,9 +33,9 @@ cd $simHome/build
 getdp EllipticalMirror.pro -solve '#1' -pos '#1'
 
 #Save the Data
-cd $pyHome/Python/
-python saveData.py $outputH5 $outputDat 
+#cd $pyHome/Python/
+#python saveData.py $outputH5 $outputDat 
 #python plotFile.py $outputH5 $outputPlot
-python viewSensorData.py $outputH5
+#python viewSensorData.py $outputH5
 
 
