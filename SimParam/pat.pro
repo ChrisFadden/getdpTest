@@ -86,13 +86,21 @@ PostOperation {
 	
 	{Name PrintData; NameOfPostProcessing CoupledProblem;
 		Operation{
-			//Print[Fluence, OnElementsOf AllOmega, File "fluence.pos"];
+			Print[Fluence, OnElementsOf AllOmega, LastTimeStepOnly, File "fluence.pos"];
+			Print[initPressure, OnElementsOf AllOmega, LastTimeStepOnly, File "initPressure.pos"];
 			Print[Pressure, OnElementsOf AllOmega, File "pressure.pos"];
-//			Print[measPressure, OnElementsOf Bndry, 
-//				Format NodeTable, File "BndMeas.tdat"];
+			Print[measPressure, OnElementsOf Bndry, 
+				Format NodeTable, File "BndMeas.tdat"];
 		}
 	}
-	 
+	
+	/*
+	{Name PrintFluence; NameOfPostProcessing SaveFluence;
+		Operation{
+			Print[Fluence, OnElementsOf AllOmega, File "fluence.pos"];	
+		}
+	}
+	*/
 }
 
 

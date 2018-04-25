@@ -41,10 +41,10 @@ Formulation {
 		
 	//Pressure Equations
 	{ Name waveFormulation; Type FemEquation;
-		Quantity{
-			//{ Name phi; Type Local; NameOfSpace phiFuncSpace; }
-			{ Name p; Type Local; NameOfSpace pressureFuncSpace;}	
-		}
+		Quantity{ {Name p; Type Local; NameOfSpace pressureFuncSpace;} 
+							{Name phi; Type Local; NameOfSpace phiFuncSpace;}	
+		}	
+					
 
 		Equation{
 			//Inital Time Step
@@ -61,11 +61,8 @@ Formulation {
 	}
 	//Fluence Equations
 	{ Name dotFormulation; Type FemEquation;
-		Quantity { 
-			{ Name phi; Type Local; NameOfSpace phiFuncSpace; }	
-		}
+		Quantity { { Name phi; Type Local; NameOfSpace phiFuncSpace;} }
 		Equation {
-
 			Integral{[ -mua[] * Dof{phi}, {phi}];
 				In AllOmega; Jacobian JVol; Integration I1;}
 	
@@ -74,11 +71,9 @@ Formulation {
 		}
 	}
 
-
 	//Copy "phi" in "phi_aux"
   {Name CopyPhi; Type FemEquation;
     Quantity{
-    // v is the unknown
       {Name phi; Type Local; NameOfSpace phiFuncSpace; }
       {Name phi_aux; Type Local; NameOfSpace pressureFuncSpace;}
     }
@@ -89,10 +84,7 @@ Formulation {
       Galerkin{ [-mua[]*{phi}, {phi_aux}];
         In AllOmega; Jacobian JVol; Integration I1;}
     }
-  }
-	
-	
-	
+  }	
 }
 
 /*======================
@@ -102,9 +94,7 @@ Formulation {
 Resolution {
 	//Pressure Resolution
 	{ Name waveSolve;
-		System{
-			{ Name wave_sys; NameOfFormulation waveFormulation;}
-		}
+		System{ { Name wave_sys; NameOfFormulation waveFormulation;} }
 
 		Operation{
 			// Initialisation
@@ -127,7 +117,6 @@ Resolution {
     //System associated to "phi" will be transfered to the weak formulation of "v"
       {Name PbPhi; NameOfFormulation dotFormulation;}
       {Name PbPhiaux; NameOfFormulation CopyPhi; DestinationSystem wave_sys;}
-//      {Name wave_sys; NameOfFormulation waveFormulation;}
     }
     Operation{
       Generate[PbPhi]; Solve[PbPhi]; SaveSolution[PbPhi];
@@ -143,11 +132,12 @@ Post Processing
 
 PostProcessing {
 		
-	{Name CoupledProblem; NameOfFormulation waveFormulation;
+	{Name CoupledProblem; NameOfFormulation waveFormulation; 
     Quantity{
-//      {Name Fluence; Value {Local{[{phi}];In AllOmega; Jacobian JVol;}}}
+      {Name Fluence; Value {Local{[{phi}];In AllOmega; Jacobian JVol;}}}
+			{Name initPressure; Value {Local{[mua[] * {phi}]; In AllOmega; Jacobian JVol;}}}
       {Name Pressure; Value {Local{[{p}];In AllOmega; Jacobian JVol;}}}
-//			{ Name measPressure; Value {Local{[{p}]; In Bndry; Jacobian JVol;}}}
+			{ Name measPressure; Value {Local{[{p}]; In Bndry; Jacobian JVol;}}}
 		}
   }
 }
