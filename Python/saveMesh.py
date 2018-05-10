@@ -1,9 +1,10 @@
 import h5py
 import numpy as np
 import gmsh
+import sys
 
-fout = './build/output.h5'
-fn = './build/microstrip.msh'
+fout = sys.argv[1] #'.build/output.h5'
+fn = sys.argv[2] #'./build/microstrip.msh'
 
 mesh = gmsh.Mesh()
 mesh.read_msh(fn)
